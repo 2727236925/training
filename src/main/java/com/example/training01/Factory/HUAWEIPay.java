@@ -7,6 +7,6 @@ public class HUAWEIPay extends Pay{
 
     @Override
     public void bulid() {
-
+        System.out.println("华为支付");
     }
 }

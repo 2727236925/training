@@ -1,4 +1,4 @@
-package com.example.training01.Real_Study.domain;
+package com.example.training01.AopStudy.domain;
 
 public class t_User {
     private int u_id;

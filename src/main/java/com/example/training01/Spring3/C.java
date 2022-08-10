@@ -1,2 +1,7 @@
-package com.example.training01.Spring3;public class C {
+package com.example.training01.Spring3;
+
+public class C {
+
+
 }
+

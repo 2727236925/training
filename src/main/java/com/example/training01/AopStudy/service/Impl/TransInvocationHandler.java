@@ -1,4 +1,4 @@
-package com.example.training01.Real_Study.service.Impl;
+package com.example.training01.AopStudy.service.Impl;
 
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;

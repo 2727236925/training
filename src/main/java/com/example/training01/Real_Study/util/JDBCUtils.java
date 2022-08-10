@@ -1,4 +1,4 @@
-package com.example.training01.util;
+package com.example.training01.Real_Study.util;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import javax.sql.DataSource;

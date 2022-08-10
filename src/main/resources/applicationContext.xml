@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
 
+
+    <context:component-scan base-package="com.example.training01.AopStudy"/>
+    <!--    加载到druid.properties-->
+    <context:property-placeholder location="druid.properties"></context:property-placeholder>
+    <!--    配置druid连接池-->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="maxActive" value="${maxActive}"></property>
+    </bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="druidDataSource"></property>
+    </bean>
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+
+    <!--定义切面-表示增强的功能-->
+<!--    <aop:config>-->
+<!--        <aop:aspect ref="myTransManager" order="2">-->
+    <!--    定义切点表示该切面在哪些地方执行功能增强-->
+<!--            <aop:pointcut id="p1" expression="execution(* com.example.training01.AopStudy.service.Impl.UserServiceImpl.UserUpdate(..))"></aop:pointcut>-->
+<!--            <aop:before method="startTrans" pointcut-ref="p1"></aop:before>-->
+<!--            <aop:after-returning method="Commit" pointcut-ref="p1"></aop:after-returning>-->
+<!--            <aop:after-throwing method="rollback" pointcut-ref="p1"></aop:after-throwing>-->
+<!--        </aop:aspect>-->
+<!--        <aop:aspect ref="computeTime" order="0">-->
+<!--            <aop:pointcut id="p2" expression="execution(* com.example.training01.AopStudy.service.Impl.UserServiceImpl.UserUpdate(..))"></aop:pointcut>-->
+<!--            <aop:before method="getStartTime" pointcut-ref="p2"></aop:before>-->
+<!--            <aop:after-returning method="getEndTimeR" pointcut-ref="p2"></aop:after-returning>-->
+<!--            <aop:after-throwing method="getEndTime" pointcut-ref="p2"></aop:after-throwing>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+    <aop:aspectj-autoproxy />
 </beans>

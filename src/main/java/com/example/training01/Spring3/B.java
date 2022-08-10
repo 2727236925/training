@@ -1,2 +1,6 @@
-package com.example.training01.Spring3;public class B {
+package com.example.training01.Spring3;
+
+public class B {
+
+
 }

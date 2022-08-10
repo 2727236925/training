@@ -1,6 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
 
+<!--        <bean id="a1" name="a11" class="com.example.training01.Spring.Animal"></bean>-->
+<!--        <bean id="cat" class="com.example.training01.Spring.MyFactory"></bean>-->
+
+<!--        静态工厂方式创建Bean-->
+<!--        <bean id="cat2" class="com.example.training01.Spring.MyStaticFactory" factory-method="createAnimal"></bean>-->
+
+<!--        工厂方式创建bean-->
+<!--        <bean id="factory" class="com.example.training01.Spring.MyFactory2"></bean>-->
+<!--        <bean id="cat3" factory-bean="factory" factory-method="createAnimal"></bean>-->
+
+<!--        单个bean懒加载：-->
+<!--        <bean id="p2" class="com.example.training01.Spring2.Person2" lazy-init="true"></bean>-->
+<!--        全局bean懒加载：default-lazy-init="true"-->
+<!--        即刻加载 / 懒加载？-->
+<!--        懒加载优点： 节省了资源-->
+<!--        懒加载缺点： 响应的整个时间变长了-->
+<!--        特点： 第一次使用的周期较长，第二次，第三次,后续使用正常-->
+
+
+<!--        <bean id="p3" class="com.example.training01.Spring2.Person3">-->
+<!--                <property name="id" value="1001"></property>-->
+<!--                <property name="name" value="jack" ></property>-->
+<!--        </bean>-->
+
+
+<!--        <bean id="a" class="com.example.training01.Spring3.A">-->
+<!--                <property name="aname" value="a类型"></property>-->
+<!--                <property name="b" ref="b"></property>-->
+<!--        </bean>-->
+<!--        <bean id="b" class="com.example.training01.Spring3.B">-->
+<!--                <property name="bname" value="b类型"></property>-->
+<!--                <property name="c" ref="c"></property>-->
+<!--        </bean>-->
+<!--        <bean id="c" class="com.example.training01.Spring3.C">-->
+<!--                <property name="cname" value="c类型"></property>-->
+<!--                <property name="a" ref="a"></property>-->
+<!--        </bean>-->
+
+<!--        <bean id="a" class="com.example.training01.Spring3.A">-->
+<!--                <constructor-arg name="aname" value="a类型"></constructor-arg>-->
+<!--                <constructor-arg name="b" ref="b"></constructor-arg>-->
+<!--        </bean>-->
+<!--        <bean id="b" class="com.example.training01.Spring3.B">-->
+<!--                <constructor-arg name="bname" value="b类型"></constructor-arg>-->
+<!--                <constructor-arg name="c" ref="c"></constructor-arg>-->
+<!--        </bean>-->
+<!--        <bean id="c" class="com.example.training01.Spring3.B">-->
+<!--                <constructor-arg name="cname" value="c类型"></constructor-arg>-->
+<!--                <constructor-arg name="a" ref="a"></constructor-arg>-->
+<!--        </bean>-->
+
+<!--        <bean id="driverManager" class="java.sql.DriverManager"></bean>-->
+
+<!--        <context:property-placeholder location="jdbc.properties"></context:property-placeholder>-->
+
+<!--        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--                <property name="url" value="${jdbc.url}"></property>-->
+<!--                <property name="driverClassName" value="${jdbc.driverClassName}"></property>-->
+<!--                <property name="username" value="${jdbc.username}"></property>-->
+<!--                <property name="password" value="${jdbc.password}"></property>-->
+<!--        </bean>-->
+<!--        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+<!--                <property name="dataSource" ref="dataSource"></property>-->
+<!--        </bean>-->
+
+<!--        <bean id="basicDataSource" class="org.apache.commons.dbcp2.BasicDataSource">-->
+<!--                <property name="url" value="${jdbc.url}"></property>-->
+<!--                <property name="driverClassName" value="${jdbc.driverClassName}"></property>-->
+<!--                <property name="username" value="${jdbc.username}"></property>-->
+<!--                <property name="password" value="${jdbc.password}"></property>-->
+<!--        </bean>-->
+        <context:component-scan base-package="com.example.training01.MybatisStudy"/>
+        <context:component-scan base-package="com.example.training01.Real_Study"/>
+        <context:property-placeholder location="druid.properties"></context:property-placeholder>
+        <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+                <property name="url" value="${jdbc.url}"></property>
+                <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+                <property name="username" value="${jdbc.username}"></property>
+                <property name="password" value="${jdbc.password}"></property>
+                <property name="maxActive" value="${maxActive}"></property>
+        </bean>
+        <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+                <property name="dataSource" ref="druidDataSource"></property>
+        </bean>
+        <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+                <property name="dataSource" ref="druidDataSource"/>
+        </bean>
+
+<!--        <bean id="userDao" class="com.example.training01.Real_Study.dao.Impl.UserDaoImpl">-->
+<!--                <property name="template" ref="jdbcTemplate"></property>-->
+<!--        </bean>-->
+<!--        <bean id="service" class="com.example.training01.Real_Study.service.Impl.UserServiceImpl">-->
+<!--                <property name="userDao" ref="userDao"></property>-->
+<!--        </bean>-->
 </beans>

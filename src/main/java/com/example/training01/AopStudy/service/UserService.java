@@ -1,8 +1,7 @@
-package com.example.training01.Real_Study.service;
+package com.example.training01.AopStudy.service;
 
-import com.example.training01.Real_Study.domain.t_User;
-import com.example.training01.Real_Study.entity.Operation;
-import org.springframework.stereotype.Service;
+import com.example.training01.AopStudy.domain.t_User;
+import com.example.training01.AopStudy.entity.Operation;
 
 import java.sql.SQLException;
 

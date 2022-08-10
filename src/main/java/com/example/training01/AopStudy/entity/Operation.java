@@ -1,4 +1,4 @@
-package com.example.training01.Real_Study.entity;
+package com.example.training01.AopStudy.entity;
 
 public class Operation {
     private int id;

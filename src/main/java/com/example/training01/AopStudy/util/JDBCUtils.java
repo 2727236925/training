@@ -1,6 +1,7 @@
-package com.example.training01.Real_Study.util;
+package com.example.training01.AopStudy.util;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+
 import javax.sql.DataSource;
 import java.io.InputStream;
 import java.sql.Connection;

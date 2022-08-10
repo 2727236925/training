@@ -1,15 +1,10 @@
-package com.example.training01.Real_Study.service.Impl;
+package com.example.training01.AopStudy.service.Impl;
 
-import com.example.training01.Real_Study.dao.UserDao;
-import com.example.training01.Real_Study.domain.t_User;
-import com.example.training01.Real_Study.entity.Operation;
-import com.example.training01.Real_Study.service.UserService;
-
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import com.example.training01.AopStudy.dao.UserDao;
+import com.example.training01.AopStudy.domain.t_User;
+import com.example.training01.AopStudy.entity.Operation;
+import com.example.training01.AopStudy.service.UserService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.annotation.Resource;
 import java.sql.SQLException;
@@ -23,7 +18,6 @@ public class UserServiceImpl implements UserService {
 //    public void setUserDao(UserDaoImpl userDao) {
 //        this.userDao = userDao;
 //    }
-
 
     /**
      * 业务方法中侵入了事务管理代码

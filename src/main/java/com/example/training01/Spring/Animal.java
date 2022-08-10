@@ -1,4 +1,4 @@
-package com.example.training01.String;
+package com.example.training01.Spring;
 
 public class Animal {
     private String name;

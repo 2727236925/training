@@ -1,44 +1,53 @@
-package com.example.training01.Real_Study.util;
+package com.example.training01.AopStudy.util;
 
+import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.annotation.Resource;
-import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * 事务管理器
  */
 @Service("myTransManager")
+@Aspect
+@Order(2)
 public class MyTransManager {
-    @Resource(name = "druidDataSource")
-    private DataSource druidDataSource;
-    private static ThreadLocal<Connection> threadLocal=new ThreadLocal<>();
+    @Resource(name = "txManager")
+    private DataSourceTransactionManager manager;
 
-    public Connection getConn() throws SQLException {
-        Connection conn = threadLocal.get();
-        if(conn !=null){
-            return conn;
-        }
-        conn = druidDataSource.getConnection();
-        threadLocal.set(conn);
-        return conn;
+    private TransactionStatus status=null;
+
+    @Pointcut("execution(* com.example.training01.AopStudy.service.Impl.UserServiceImpl.UserUpdate(..))")
+    public void pointCut(){
+
     }
 
     //开启事务
-    public void startTrans() throws SQLException {
-        getConn().setAutoCommit(false);
+    @Before("pointCut()")
+    public TransactionStatus startTrans(){
+        System.out.println("建立连接");
+        TransactionDefinition definition = new DefaultTransactionDefinition();
+        this.status = manager.getTransaction(definition);
+        return status;
     }
 
     //提交
-    public void Commit() throws SQLException {
-        getConn().commit();
+    @AfterReturning("pointCut()")
+    public void Commit() {
+        System.out.println("没有问题，提交");
+        manager.commit(status);
     }
 
     //回滚操作
-    public void rollback() throws SQLException {
-        getConn().rollback();
+    @AfterThrowing("pointCut()")
+    public void rollback() {
+        System.out.println("有问题，回滚");
+        manager.rollback(status);
     }
 
 }
