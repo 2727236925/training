@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.training01.MybatisStudy.dao.UserDao">
+    <!--findAll方法-->
+    <select id="findAll" resultType="com.example.training01.MybatisStudy.entity.t_User">
+        SELECT * FROM t_user;</select>
+    <insert id="insert" parameterType="com.example.training01.MybatisStudy.entity.t_User">
+        insert into t_user values(#{u_id} , #{u_name});</insert>
+
+</mapper>
+
